@@ -15,8 +15,8 @@ function resetCanvas() {
   createGrid(gridSize);
 }
 
-function changePaintBrushColor(e) {
-  paintBrushColor = e.target.value;
+function changePaintBrushColor(element) {
+  paintBrushColor = element.target.value;
 }
 
 function createGrid(gridSize = 16) {
@@ -26,9 +26,11 @@ function createGrid(gridSize = 16) {
     const pixelSize = `${800 / gridSize}px`;
     pixel.style.width = pixelSize;
     pixel.style.heigth = pixelSize;
-
-    pixel.addEventListener("mouseenter", () => {
-      pixel.style.backgroundColor = paintBrushColor;
+    pixel.addEventListener("mousemove", (event) => {
+      if (event.buttons == 1) {
+        event.preventDefault();
+        pixel.style.backgroundColor = paintBrushColor;
+      }
     });
 
     canvas.appendChild(pixel);
