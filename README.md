@@ -1,8 +1,8 @@
 <br />
 <div align="center">
-  <a href="https://adrianogtl.github.io/top-etch-a-sketch/">
+  <!-- <a href="https://adrianogtl.github.io/top-etch-a-sketch/">
     <img src=".github/logo.png" alt="Logo" width="80" height="80">
-  </a>
+  </a> -->
 
 <h3 align="center">Etch A Sketch | The Odin Project</h3>
 
