@@ -1,26 +1,23 @@
 <br />
 <div align="center">
-  <a href="https://adrianogtl.github.io/REPO_NAME/">
+  <a href="https://adrianogtl.github.io/top-etch-a-sketch/">
     <img src=".github/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Title</h3>
+<h3 align="center">Etch A Sketch | The Odin Project</h3>
 
   <p align="center">
-    Description
     <br />
     <br />
-    <a href="https://adrianogtl.github.io/REPO_NAME/">View demo 👀</a>
+    <a href="https://adrianogtl.github.io/top-etch-a-sketch/">View demo 👀</a>
     &nbsp;&nbsp;&nbsp;
-    <a href="#">link 📚</a>
+    <a href="https://www.theodinproject.com/lessons/foundations-etch-a-sketch#assignment">The Odin Project 📚</a>
 
   </p>
 </div>
 
-## 🎯 About
-
-![Screenshot](.github/screenshot.jpg)
+<!-- ## 🎯 About
 
 ## 🚀 Technologies
 
-## ♥️ Acknowledgments
+## ♥️ Acknowledgments -->
