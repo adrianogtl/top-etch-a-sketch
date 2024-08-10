@@ -16,8 +16,10 @@
   </p>
 </div>
 
-<!-- ## 🎯 About
+## 🎯 About
 
-## 🚀 Technologies
+- This project is part of the Foundations Course from The Odin Project
 
-## ♥️ Acknowledgments -->
+<!-- ## 🚀 Technologies -->
+
+<!-- ## ♥️ Acknowledgments -->
