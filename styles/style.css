@@ -11,6 +11,7 @@
   --secondary-color: #e5e7eb;
   --border-color: #e9ebee;
   --font-color: #1f2937;
+  --font-color2: #dfecec;
 }
 
 body {
@@ -26,10 +27,16 @@ button {
   color: var(--font-color);
   border: none;
   border-radius: 5px;
+  margin-top: 1rem;
 }
 
 button:hover {
   cursor: pointer;
+}
+
+.active {
+  background-color: var(--primary-color);
+  color: var(--font-color2);
 }
 
 .header {
@@ -61,6 +68,6 @@ button:hover {
   display: flex;
   flex-wrap: wrap;
   border-radius: 8px;
-  border: 2px solid var(--border-color);
+  outline: 4px solid var(--border-color);
   background-color: white;
 }

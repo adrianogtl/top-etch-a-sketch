@@ -1,16 +1,16 @@
 const canvas = document.querySelector(".canvas");
 const gridSizeInput = document.querySelector("#grid-size-input");
 const gridSizeSpan = document.querySelector("#grid-size-span");
-const clearBtn = document.querySelector("#clear-btn");
 const colorSelector = document.querySelector("#pencil-color");
+const colorBtn = document.querySelector("#color-btn");
+const eraseBtn = document.querySelector("#erase-btn");
+const clearBtn = document.querySelector("#clear-btn");
+
+let brushColor = colorSelector.value;
+let lastTargetElement = colorBtn;
 
 const getGrid = () => Array.from(canvas.querySelectorAll("div"));
-
-let paintBrushColor = colorSelector.value;
-
-function changePaintBrushColor(element) {
-  paintBrushColor = element.target.value;
-}
+const changeBrushColor = (color) => (brushColor = color);
 
 function changeGridSize(gridSize) {
   if (gridSize < 16 || gridSize > 50) {
@@ -32,7 +32,7 @@ function createGrid(gridSize = 16) {
     pixel.addEventListener("mousemove", (event) => {
       if (event.buttons == 1) {
         event.preventDefault();
-        pixel.style.backgroundColor = paintBrushColor;
+        pixel.style.backgroundColor = brushColor;
       }
     });
 
@@ -50,12 +50,40 @@ function clearGrid() {
   pixels.forEach((pixel) => (pixel.style.backgroundColor = "#fff"));
 }
 
+function handleClick(e) {
+  const targetElement = e.target;
+
+  if (targetElement.id === "clear-btn") {
+    clearGrid();
+    return;
+  }
+
+  if (targetElement.id === "erase-btn") {
+    changeBrushColor("#fff");
+  } else {
+    changeBrushColor(colorSelector.value);
+  }
+
+  lastTargetElement.classList.remove("active");
+  targetElement.classList.add("active");
+
+  lastTargetElement = targetElement;
+
+  return;
+}
+
 gridSizeInput.addEventListener("input", () => {
   const gridSize = gridSizeInput.value;
   changeGridSize(gridSize);
   gridSizeSpan.textContent = `${gridSize} x ${gridSize}`;
 });
-clearBtn.addEventListener("click", clearGrid);
-colorSelector.addEventListener("change", changePaintBrushColor);
+colorBtn.addEventListener("click", handleClick);
+eraseBtn.addEventListener("click", handleClick);
+clearBtn.addEventListener("click", handleClick);
+colorSelector.addEventListener("change", (e) => {
+  if (colorBtn.classList.contains("active")) {
+    changeBrushColor(e.target.value);
+  }
+});
 
 createGrid();
