@@ -4,25 +4,113 @@
   box-sizing: border-box;
 }
 
-body {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+:root {
+  --bg-color: #f9fafb;
+  --bg-code-color: #fff;
+  --primary-color: #0f766e;
+  --secondary-color: #e5e7eb;
+  --font-color: #1f2937;
+  --font-color2: #dfecec;
 }
 
-.canvas {
-  width: 800px;
-  height: 800px;
-  margin: 0 auto;
+body {
+  height: 100vh;
+  background-color: var(--bg-color);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1rem;
+  color: var(--font-color);
+}
+
+.hr {
+  border-color: var(--secondary-color);
+  margin: 0.5rem 0;
+}
+
+.header {
+  position: relative;
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--bg-code-color);
+}
+
+.title::before {
+  content: "";
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  background-size: contain;
+  background: url("../img/logo.png");
+  vertical-align: middle;
+}
+
+.main {
   display: flex;
-  flex-wrap: wrap;
-  outline: 5px solid gray;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
 .controls {
+  min-width: 200px;
+}
+
+.controls > * {
+  display: block;
+  width: 100%;
+}
+
+#color-history {
   display: flex;
-  gap: 1rem;
-  padding: 1rem;
+  align-items: center;
+}
+
+input[type="range"] {
+  accent-color: var(--primary-color);
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--secondary-color);
+  color: var(--font-color);
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn:active {
+  background-color: var(--primary-color);
+  color: var(--font-color2);
+}
+
+.active {
+  background-color: var(--primary-color);
+  color: var(--font-color2);
+}
+
+.canvas {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 8px;
+  outline: 4px solid var(--secondary-color);
+  background-color: white;
+}
+
+.box {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin: 0.3rem;
+}
+
+.box:hover {
+  cursor: crosshair;
 }

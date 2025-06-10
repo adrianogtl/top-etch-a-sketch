@@ -3,15 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
     <title>Etch a Sketch</title>
     <link rel="stylesheet" href="styles/style.css" />
     <script src="scripts/script.js" defer></script>
   </head>
   <body ondragstart="return false" ondrop="return false">
-    <div class="canvas"></div>
-    <div class="controls">
-      <button type="button" id="reset-btn">Reset</button>
-      <input type="color" name="pencil-color" id="pencil-color" value="#000" />
-    </div>
+    <header class="header">
+      <h1 class="title">Etch a Sketch</h1>
+    </header>
+    <main class="main">
+      <div class="controls">
+        <div id="color-history"><span>History:</span></div>
+        <hr class="hr" />
+        <label for="grid-size-input"
+          >Grid Size: <span id="grid-size-span">16 x 16</span></label
+        >
+        <input
+          type="range"
+          name="grid-size-input"
+          id="grid-size-input"
+          value="16"
+          min="16"
+          max="50"
+        />
+      </div>
+      <div class="canvas"></div>
+      <div class="controls">
+        <input
+          type="color"
+          name="pencil-color"
+          id="pencil-color"
+          value="#000000"
+        />
+        <button id="color-btn" class="btn active" type="button">Color</button>
+        <button id="erase-btn" class="btn" type="button">Erase</button>
+        <button id="clear-btn" class="btn" type="button">Clear</button>
+      </div>
+    </main>
   </body>
 </html>
