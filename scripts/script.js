@@ -1,4 +1,5 @@
 const canvas = document.querySelector(".canvas");
+const colorHistoryList = document.querySelector("#color-history");
 const gridSizeInput = document.querySelector("#grid-size-input");
 const gridSizeSpan = document.querySelector("#grid-size-span");
 const colorSelector = document.querySelector("#pencil-color");
@@ -8,6 +9,21 @@ const clearBtn = document.querySelector("#clear-btn");
 
 let brushColor = colorSelector.value;
 let lastTargetElement = colorBtn;
+let colorHistory = [];
+
+function renderColorHistory() {
+  colorHistoryList.innerHTML = "History: ";
+  colorHistory.forEach((color) => {
+    const box = document.createElement("div");
+    box.classList.add("box");
+    box.style.backgroundColor = color;
+    box.addEventListener("click", () => {
+      changeBrushColor(color);
+      colorSelector.value = color;
+    });
+    colorHistoryList.appendChild(box);
+  });
+}
 
 const getGrid = () => Array.from(canvas.querySelectorAll("div"));
 const changeBrushColor = (color) => (brushColor = color);
@@ -68,7 +84,6 @@ function handleClick(e) {
   targetElement.classList.add("active");
 
   lastTargetElement = targetElement;
-
   return;
 }
 
@@ -83,6 +98,14 @@ clearBtn.addEventListener("click", handleClick);
 colorSelector.addEventListener("change", (e) => {
   if (colorBtn.classList.contains("active")) {
     changeBrushColor(e.target.value);
+    if (colorHistory.length < 5) {
+      colorHistory.push(e.target.value);
+      renderColorHistory();
+    } else {
+      colorHistory.shift();
+      colorHistory.push(e.target.value);
+      renderColorHistory();
+    }
   }
 });
 

@@ -5,50 +5,48 @@
 }
 
 :root {
-  --bg-color1: #f9fafc;
-  --bg-color2: white;
+  --bg-color: #f9fafb;
+  --bg-code-color: #fff;
   --primary-color: #0f766e;
   --secondary-color: #e5e7eb;
-  --border-color: #e9ebee;
   --font-color: #1f2937;
   --font-color2: #dfecec;
 }
 
 body {
   height: 100vh;
-  background-color: var(--bg-color1);
+  background-color: var(--bg-color);
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1rem;
   color: var(--font-color);
 }
 
-button {
-  padding: 0.5rem 1rem;
-  background-color: var(--secondary-color);
-  color: var(--font-color);
-  border: none;
-  border-radius: 5px;
-  margin-top: 1rem;
-}
-
-button:hover {
-  cursor: pointer;
-}
-
-.active {
-  background-color: var(--primary-color);
-  color: var(--font-color2);
+.hr {
+  border-color: var(--secondary-color);
+  margin: 0.5rem 0;
 }
 
 .header {
+  position: relative;
   text-align: center;
   padding: 1rem;
-  background-color: var(--bg-color2);
+  background-color: var(--bg-code-color);
+}
+
+.title::before {
+  content: "";
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  background-size: contain;
+  background: url("../img/logo.png");
+  vertical-align: middle;
 }
 
 .main {
   display: flex;
-  justify-content: space-evenly;
-  max-width: 1200px;
+  gap: 2rem;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 2rem;
 }
@@ -62,12 +60,57 @@ button:hover {
   width: 100%;
 }
 
+#color-history {
+  display: flex;
+  align-items: center;
+}
+
+input[type="range"] {
+  accent-color: var(--primary-color);
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--secondary-color);
+  color: var(--font-color);
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn:active {
+  background-color: var(--primary-color);
+  color: var(--font-color2);
+}
+
+.active {
+  background-color: var(--primary-color);
+  color: var(--font-color2);
+}
+
 .canvas {
   width: 400px;
   height: 400px;
   display: flex;
   flex-wrap: wrap;
   border-radius: 8px;
-  outline: 4px solid var(--border-color);
+  outline: 4px solid var(--secondary-color);
   background-color: white;
+}
+
+.box {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin: 0.3rem;
+}
+
+.box:hover {
+  cursor: crosshair;
 }
