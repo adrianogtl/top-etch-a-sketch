@@ -8,7 +8,7 @@ const rainbowBtn = document.querySelector("#rainbow-btn");
 const eraseBtn = document.querySelector("#erase-btn");
 
 const colorHistorySizeLimit = 5;
-let colorHistoryList = [];
+let colorHistoryList = JSON.parse(localStorage.getItem("colorHistory")) || [];
 let currentColor = colorSelector.value;
 let isColorBtnActive = true;
 let isRainbowBtnActive = false;
@@ -24,9 +24,13 @@ const setCurrentColor = (currColor) => {
 const updateColorHistory = (currColor) => {
   if (colorHistoryList.length === colorHistorySizeLimit) {
     colorHistoryList.shift();
+    localStorage.setItem("colorHistory", JSON.stringify(colorHistoryList));
   }
   colorHistoryList.push(currColor);
-
+  localStorage.setItem("colorHistory", JSON.stringify(colorHistoryList));
+  renderColorHistoryList();
+};
+const renderColorHistoryList = () => {
   colorHistory.innerText = "History: ";
   colorHistoryList.forEach((color) => {
     const box = document.createElement("div");
@@ -56,6 +60,10 @@ const getRainbowColor = () => {
   hue++;
   return hsl;
 };
+
+if (colorHistoryList) {
+  renderColorHistoryList();
+}
 
 function createGrid(gridSize = 16) {
   const canvasWidth = canvas.clientWidth;
@@ -134,7 +142,11 @@ function eraseBrush(e) {
 function clearGrid() {
   const pixels = getGrid();
   pixels.forEach((pixel) => (pixel.style.backgroundColor = "#fff"));
+  colorHistoryList = [];
+  localStorage.removeItem("colorHistory");
+  renderColorHistoryList();
 }
+
 export {
   createGrid,
   changeGridSize,
