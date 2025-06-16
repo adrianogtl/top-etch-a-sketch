@@ -4,19 +4,20 @@ const gridSizeSpan = document.querySelector("#grid-size-span");
 const gridSizeInput = document.querySelector("#grid-size-input");
 const colorSelector = document.querySelector("#color-selector");
 const colorBtn = document.querySelector("#color-btn");
+const rainbowBtn = document.querySelector("#rainbow-btn");
 const eraseBtn = document.querySelector("#erase-btn");
 
 const colorHistorySizeLimit = 5;
 let colorHistoryList = [];
 let currentColor = colorSelector.value;
-let lastColor = currentColor;
-let isEraser = false;
+let isColorBtnActive = true;
+let isRainbowBtnActive = false;
+let hue = 0;
 
 const getGrid = () => Array.from(canvas.querySelectorAll("div"));
 const getNewGridSize = () => gridSizeInput.value;
 const setCurrentColor = (currColor) => {
   if (!eraseBtn.classList.contains("active")) {
-    lastColor = currentColor;
     currentColor = currColor;
   }
 };
@@ -38,9 +39,22 @@ const updateColorHistory = (currColor) => {
     colorHistory.appendChild(box);
   });
 };
-const toggleActive = () => {
-  colorBtn.classList.toggle("active");
-  eraseBtn.classList.toggle("active");
+const toggleActive = (curr) => {
+  colorBtn.classList.remove("active");
+  rainbowBtn.classList.remove("active");
+  eraseBtn.classList.remove("active");
+  curr.classList.add("active");
+};
+const getRainbowColor = () => {
+  const hsl = `hsl(${hue}, 100%, 50%)`;
+
+  if (hue === 360) {
+    hue = 0;
+    return;
+  }
+
+  hue++;
+  return hsl;
 };
 
 function createGrid(gridSize = 16) {
@@ -55,18 +69,24 @@ function createGrid(gridSize = 16) {
     pixel.classList.add("pixel");
     pixel.addEventListener("click", (event) => {
       event.preventDefault();
-      pixel.style.backgroundColor = currentColor;
 
-      if (!colorHistoryList.includes(currentColor) && !isEraser) {
+      pixel.style.backgroundColor = isRainbowBtnActive
+        ? getRainbowColor()
+        : currentColor;
+
+      if (!colorHistoryList.includes(currentColor) && isColorBtnActive) {
         updateColorHistory(currentColor);
       }
     });
     pixel.addEventListener("mousemove", (event) => {
       if (event.buttons == 1) {
         event.preventDefault();
-        pixel.style.backgroundColor = currentColor;
 
-        if (!colorHistoryList.includes(currentColor) && !isEraser) {
+        pixel.style.backgroundColor = isRainbowBtnActive
+          ? getRainbowColor()
+          : currentColor;
+
+        if (!colorHistoryList.includes(currentColor) && isColorBtnActive) {
           updateColorHistory(currentColor);
         }
       }
@@ -92,19 +112,23 @@ function changeGridSize() {
 }
 
 function colorBrush() {
-  if (eraseBtn.classList.contains("active")) {
-    isEraser = false;
-    currentColor = colorSelector.value;
-    toggleActive();
-  }
+  isColorBtnActive = true;
+  isRainbowBtnActive = false;
+  currentColor = colorSelector.value;
+  toggleActive(colorBtn);
+}
+
+function rainbowBrush() {
+  isColorBtnActive = false;
+  isRainbowBtnActive = true;
+  toggleActive(rainbowBtn);
 }
 
 function eraseBrush(e) {
-  if (colorBtn.classList.contains("active")) {
-    isEraser = true;
-    currentColor = "#fff";
-    toggleActive();
-  }
+  isColorBtnActive = false;
+  isRainbowBtnActive = false;
+  currentColor = "#fff";
+  toggleActive(eraseBtn);
 }
 
 function clearGrid() {
@@ -115,6 +139,7 @@ export {
   createGrid,
   changeGridSize,
   colorBrush,
+  rainbowBrush,
   eraseBrush,
   clearGrid,
   setCurrentColor,
