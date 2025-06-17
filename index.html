@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon" />
     <title>Etch a Sketch</title>
-    <link rel="stylesheet" href="styles/style.css" />
-    <script src="scripts/script.js" defer></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/script.js" type="module" defer></script>
   </head>
   <body ondragstart="return false" ondrop="return false">
     <header class="header">
@@ -14,7 +14,9 @@
     </header>
     <main class="main">
       <div class="controls">
-        <div id="color-history"><span>History:</span></div>
+        <div id="color-history">
+          <span>History:</span>
+        </div>
         <hr class="hr" />
         <label for="grid-size-input"
           >Grid Size: <span id="grid-size-span">16 x 16</span></label
@@ -32,11 +34,12 @@
       <div class="controls">
         <input
           type="color"
-          name="pencil-color"
-          id="pencil-color"
+          name="color-selector"
+          id="color-selector"
           value="#000000"
         />
         <button id="color-btn" class="btn active" type="button">Color</button>
+        <button id="rainbow-btn" class="btn">Rainbow</button>
         <button id="erase-btn" class="btn" type="button">Erase</button>
         <button id="clear-btn" class="btn" type="button">Clear</button>
       </div>
